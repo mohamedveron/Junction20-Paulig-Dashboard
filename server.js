@@ -1,15 +1,18 @@
 var snowflake = require('snowflake-sdk')
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const app = express();
 
-const http = require('http');
 
 const hostname = '127.0.0.1';
 const port = 3000;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
-});
+// sets ejs views folder
+app.set('views', path.join(__dirname, 'views'));
+
+// sets view engine
+app.set('view engine', 'ejs'); 
 
 // Create a Connection object that we can use later to connect.
 var connection = snowflake.createConnection( {
@@ -45,6 +48,11 @@ connection.connect(
       }
     });
 
-server.listen(port, hostname, () => {
+    app.get('/api', function(req, res){
+      // do something
+      res.render('index');
+    });
+
+app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
