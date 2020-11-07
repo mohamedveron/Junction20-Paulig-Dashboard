@@ -38,6 +38,12 @@ connection.connect(
     );
 
 
+    app.get('/', function(req, res){
+      // do something
+      res.render('index.ejs')
+      
+    });
+
     app.get('/mostpurchased', function(req, res){
       // do something
       connection.execute({
