@@ -63,7 +63,7 @@ connection.connect(
     app.get('/mostunpurchased', function(req, res){
       // do something
       connection.execute({
-        sqlText: "select PRODUCT_name,  sum(order_quantity) as summ  from DEV_EDW_JUNCTION.JUNCTION_2020.WEBSHOP_DATA where PRODUCT_name not in (select PRODUCT_name from DEV_EDW_JUNCTION.JUNCTION_2020.WEBSHOP_DATA where customername = 'Mtgmvccf Afslgu')  group by  PRODUCT_name order by summ desc limit 5",
+        sqlText: "select PRODUCT_name,  sum(order_quantity) as summ  from DEV_EDW_JUNCTION.JUNCTION_2020.WEBSHOP_DATA where PRODUCT_name not in (select PRODUCT_name from DEV_EDW_JUNCTION.JUNCTION_2020.WEBSHOP_DATA where customername = 'Uawgam Cwono')  group by  PRODUCT_name order by summ desc limit 5",
         complete: function(err, stmt, rows) {
           if (err) {
             console.error('Failed to execute statement due to the following error: ' + err.message);
