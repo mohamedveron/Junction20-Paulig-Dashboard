@@ -34,6 +34,17 @@ connection.connect(
         }
     );
 
+    var statement = connection.execute({
+      sqlText: 'select PRODUCT_SUBGROUP,  sum(order_quantity) as summ  from DEV_EDW_JUNCTION.JUNCTION_2020.WEBSHOP_DATA group by  PRODUCT_SUBGROUP order by summ desc',
+      complete: function(err, stmt, rows) {
+        if (err) {
+          console.error('Failed to execute statement due to the following error: ' + err.message);
+        } else {
+          console.log('Successfully executed statement: ' + stmt.getSqlText());
+        }
+      }
+    });
+
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
