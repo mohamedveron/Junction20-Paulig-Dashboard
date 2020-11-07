@@ -24,7 +24,7 @@
 
 <main>
     <div class="jumbotron">
-        <h1>Hello Mtgmvccf Afslgu</h1>
+        <h1>Hello Mtgmvccf Afslgu :)</h1>
     </div>
 </main>
 
@@ -40,9 +40,7 @@
       const url2 = 'http://localhost:3000/mostpurchased';
      
       // get most 5 unpurchased data
-      fetch(url)
-
-        .then(res => {
+      fetch(url).then(res => {
           
           if (!res.ok) {
             // returns error with response text of error
@@ -111,9 +109,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
         // get the most 5 purchased data in the same area
-        fetch(url)
-
-        .then(res => {
+        fetch(url2).then(res => {
           
           if (!res.ok) {
             // returns error with response text of error
@@ -135,7 +131,7 @@
           const chart = {
             type: 'bar',
             title: {
-                        "text": "The Most unpurchased 5 prodducts"
+                        "text": "The Trendy prodducts in your Zone"
                     },
             legend: {
                 "toggle-action": "hide",
@@ -163,7 +159,7 @@
             series: [
               {
                 values: productsInfo,
-                text: 'Product Quantity',
+                text: 'Product Group Quantity',
               }
             ]
           };
