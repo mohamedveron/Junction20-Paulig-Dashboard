@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- ZingChart CDN script -->
+     <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+
+     <style>
+       #chart1 {
+         height: 500px;
+         width: 1500px;
+         margin: 80px
+       }
+       #chart2 {
+         height: 500px;
+         width: 1500px;
+         margin: 80px
+       }
+     </style>
+
+</head>
+<body class="container">
+
+<header>
+
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>Paulig Kulma Dashboard</h1>
+    </div>
+</main>
+
+
+    <!-- chart container -->
+    <div id="chart1"></div>
+    <div id="chart2"></div>
+
+    <!-- fetches data from api/data page & renders chart from data returned -->
+    <script>
+      // creates variable for url we want to fetch
+      const url = 'http://localhost:3000/mostunpurchased';
+      const url2 = 'http://localhost:3000/mostpurchased';
+     
+      // get most 5 unpurchased data
+      fetch(url).then(res => {
+          
+          if (!res.ok) {
+            // returns error with response text of error
+            throw new Error(res.statusText);
+          }
+          
+          return res.json();
+        })
+        // creates promise with returned data from previous promise
+        .then(data => {
+
+          let products = data;
+          let productsInfo = [];
+
+          products.forEach(item => {
+            productsInfo.push([item.PRODUCT_NAME, item.SUMM]);
+          });
+    
+          const chart = {
+            type: 'bar',
+            title: {
+                        "text": "The Most Recommended 5 products for you to serve"
+                    },
+            legend: {
+                "toggle-action": "hide",
+                header: {
+                    "text": "Legend Header"
+                        },
+                item: {
+                    "cursor": "pointer"
+                    },
+                "draggable": true,
+                "drag-handler": "icon"
+            },
+            scaleX: {
+            // set scale label
+            label: {
+                text: 'Products'
+            },
+            },
+            scaleY: {
+            // scale label with unicode character
+            label: {
+                text: 'Quantity'
+            }
+            },
+            series: [
+              {
+                values: productsInfo,
+                text: 'Product Quantity',
+              }
+            ]
+          };
+
+          // renders zingchart to the page
+          zingchart.render({
+            id: 'chart1',
+            data: chart,
+            height: '100%',
+            width: '100%'
+          });
+        })
+        // catches errors in promise chain
+        .catch(error => console.log('fetch error'));
+
+///////////////////////////////////////////////////////////////////////////////
+
+        // get the most 5 purchased data in the same area
+        fetch(url2).then(res => {
+          
+          if (!res.ok) {
+            // returns error with response text of error
+            throw new Error(res.statusText);
+          }
+          
+          return res.json();
+        })
+        // creates promise with returned data from previous promise
+        .then(data => {
+
+          let products = data;
+          let productsInfo = [];
+
+          products.forEach(item => {
+            productsInfo.push([item.PRODUCT_SUBGROUP, item.SUMM]);
+          });
+    
+          const chart = {
+            type: 'bar',
+            title: {
+                        "text": "The Trendy products in your Zone"
+                    },
+            legend: {
+                "toggle-action": "hide",
+                header: {
+                    "text": "Legend Header"
+                        },
+                item: {
+                    "cursor": "pointer"
+                    },
+                "draggable": true,
+                "drag-handler": "icon"
+            },
+            scaleX: {
+            // set scale label
+            label: {
+                text: 'Products'
+            },
+            },
+            scaleY: {
+            // scale label with unicode character
+            label: {
+                text: 'Quantity'
+            }
+            },
+            series: [
+              {
+                values: productsInfo,
+                text: 'Product Group Quantity',
+              }
+            ]
+          };
+
+          // renders zingchart to the page
+          zingchart.render({
+            id: 'chart2',
+            data: chart,
+            height: '100%',
+            width: '100%'
+          });
+        })
+        // catches errors in promise chain
+        .catch(error => console.log('fetch error'));
+    </script>
+
+
+
+</body>
+</html>
