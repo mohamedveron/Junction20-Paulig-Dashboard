@@ -8,10 +8,12 @@
        #chart1 {
          height: 500px;
          width: 1500px;
+         margin: 80px
        }
        #chart2 {
          height: 500px;
          width: 1500px;
+         margin: 80px
        }
      </style>
 
@@ -31,7 +33,6 @@
 
     <!-- chart container -->
     <div id="chart1"></div>
-    <br>
     <div id="chart2"></div>
 
     <!-- fetches data from api/data page & renders chart from data returned -->
@@ -126,13 +127,13 @@
           let productsInfo = [];
 
           products.forEach(item => {
-            productsInfo.push([item.PRODUCT_NAME, item.SUMM]);
+            productsInfo.push([item.PRODUCT_SUBGROUP, item.SUMM]);
           });
     
           const chart = {
             type: 'bar',
             title: {
-                        "text": "The Trendy prodducts in your Zone"
+                        "text": "The Trendy products in your Zone"
                     },
             legend: {
                 "toggle-action": "hide",

@@ -47,7 +47,7 @@ connection.connect(
     app.get('/mostpurchased', function(req, res){
       // do something
       connection.execute({
-        sqlText: "select PRODUCT_name,  sum(order_quantity) as summ  from DEV_EDW_JUNCTION.JUNCTION_2020.WEBSHOP_DATA where zip_code = 30100 and PRODUCT_name != 'samples' group by  PRODUCT_name order by summ desc limit 5",
+        sqlText: "select product_subgroup,  sum(order_quantity) as summ  from DEV_EDW_JUNCTION.JUNCTION_2020.WEBSHOP_DATA where zip_code = 100 and product_subgroup != 'Samples' group by  product_subgroup order by summ desc limit 10",
         complete: function(err, stmt, rows) {
           if (err) {
             console.error('Failed to execute statement due to the following error: ' + err.message);
