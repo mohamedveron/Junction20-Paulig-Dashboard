@@ -37,20 +37,37 @@ connection.connect(
         }
     );
 
-    var statement = connection.execute({
-      sqlText: "select PRODUCT_name,  sum(order_quantity) as summ  from DEV_EDW_JUNCTION.JUNCTION_2020.WEBSHOP_DATA where PRODUCT_name not in (select PRODUCT_name from DEV_EDW_JUNCTION.JUNCTION_2020.WEBSHOP_DATA where customername = 'Mtgmvccf Afslgu')  group by  PRODUCT_name order by summ desc limit 5",
-      complete: function(err, stmt, rows) {
-        if (err) {
-          console.error('Failed to execute statement due to the following error: ' + err.message);
-        } else {
-          console.log('Number of rows produced: ' + JSON.stringify(rows));
+
+    app.get('/mostpurchased', function(req, res){
+      // do something
+      connection.execute({
+        sqlText: "select PRODUCT_name,  sum(order_quantity) as summ  from DEV_EDW_JUNCTION.JUNCTION_2020.WEBSHOP_DATA where zip_code = 30100 and PRODUCT_name != 'samples' group by  PRODUCT_name order by summ desc limit 5",
+        complete: function(err, stmt, rows) {
+          if (err) {
+            console.error('Failed to execute statement due to the following error: ' + err.message);
+          } else {
+            //console.log('Number of rows produced: ' + JSON.stringify(rows));
+            res.send(JSON.stringify(rows));
+          }
         }
-      }
+      });
+      
     });
 
-    app.get('/api', function(req, res){
+    app.get('/mostunpurchased', function(req, res){
       // do something
-      res.render('index');
+      connection.execute({
+        sqlText: "select PRODUCT_name,  sum(order_quantity) as summ  from DEV_EDW_JUNCTION.JUNCTION_2020.WEBSHOP_DATA where PRODUCT_name not in (select PRODUCT_name from DEV_EDW_JUNCTION.JUNCTION_2020.WEBSHOP_DATA where customername = 'Mtgmvccf Afslgu')  group by  PRODUCT_name order by summ desc limit 5",
+        complete: function(err, stmt, rows) {
+          if (err) {
+            console.error('Failed to execute statement due to the following error: ' + err.message);
+          } else {
+            //console.log('Number of rows produced: ' + JSON.stringify(rows));
+            res.send(JSON.stringify(rows));
+          }
+        }
+      });
+      
     });
 
 app.listen(port, hostname, () => {
