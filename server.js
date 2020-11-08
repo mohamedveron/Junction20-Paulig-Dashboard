@@ -114,6 +114,22 @@ connection.connect(
       
     });
 
+    app.get('/purchases', function(req, res){
+      // do something
+      connection.execute({
+        sqlText: ' SELECT COUNT("POS"."ITEM_CODE") AS "ITEM_COUNT", "POS"."ITEM_CODE" AS "ITEM_NAME" FROM "DEV_EDW_JUNCTION"."JUNCTION_2020"."CAFE_POS_DATA" AS "POS" GROUP BY "POS"."ITEM_CODE" order by "ITEM_COUNT" desc limit 10 ',
+        complete: function(err, stmt, rows) {
+          if (err) {
+            console.error('Failed to execute statement due to the following error: ' + err.message);
+          } else {
+            //console.log('Number of rows produced: ' + JSON.stringify(rows));
+            res.send(JSON.stringify(rows));
+          }
+        }
+      });
+      
+    });
+
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });

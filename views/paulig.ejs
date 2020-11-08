@@ -15,6 +15,11 @@
          width: 1500px;
          margin: 80px
        }
+       #chart3 {
+         height: 500px;
+         width: 1500px;
+         margin: 50px
+       }
      </style>
 
 </head>
@@ -34,12 +39,14 @@
     <!-- chart container -->
     <div id="chart1"></div>
     <div id="chart2"></div>
+    <div id="chart3"></div>
 
     <!-- fetches data from api/data page & renders chart from data returned -->
     <script>
       // creates variable for url we want to fetch
       const url = 'http://localhost:3000/hourlypurchased';
       const url2 = 'http://localhost:3000/covid';
+      const url3 = 'http://localhost:3000/purchases';
      
       // get hourly purchased data
       fetch(url).then(res => {
@@ -177,6 +184,72 @@
           // renders zingchart to the page
           zingchart.render({
             id: 'chart1',
+            data: chart,
+            height: '100%',
+            width: '100%'
+          });
+        })
+        // catches errors in promise chain
+        .catch(error => console.log('fetch error'));
+
+        //////////////////////////////////////////////////////////////
+
+        // get the most 10 purchased products
+        fetch(url3).then(res => {
+          
+          if (!res.ok) {
+            // returns error with response text of error
+            throw new Error(res.statusText);
+          }
+          
+          return res.json();
+        })
+        // creates promise with returned data from previous promise
+        .then(data => {
+
+          let products = data;
+          let productsInfo = [];
+
+          products.forEach(item => {
+            productsInfo.push([item.ITEM_NAME, item.ITEM_COUNT]);
+          });
+    
+          const chart = {
+            type: 'bar',
+            title: {
+                        "text": "The Most 5 Purchased Products"
+                    },
+            legend: {
+                "toggle-action": "hide",
+                item: {
+                    "cursor": "pointer"
+                    },
+                "draggable": true,
+                "drag-handler": "icon"
+            },
+            scaleX: {
+            // set scale label
+            label: {
+                text: 'Product code'
+            },
+            },
+            scaleY: {
+            // scale label with unicode character
+            label: {
+                text: 'PURCHASE COUNT'
+            }
+            },
+            series: [
+              {
+                values: productsInfo,
+                text: 'Product counts',
+              }
+            ]
+          };
+
+          // renders zingchart to the page
+          zingchart.render({
+            id: 'chart3',
             data: chart,
             height: '100%',
             width: '100%'
