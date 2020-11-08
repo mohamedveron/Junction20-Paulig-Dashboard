@@ -85,7 +85,7 @@ connection.connect(
     app.get('/hourlypurchased', function(req, res){
       // do something
       connection.execute({
-        sqlText: 'SELECT COUNT(DISTINCT "HEADER_ID") AS "PURCHASE COUNT", DATE_PART(HOUR,"HEADER_JOURNALTIME") AS "HOUR OF PURCHASE" FROM "DEV_EDW_JUNCTION"."JUNCTION_2020"."CAFE_POS_DATA" GROUP BY DATE_PART(HOUR,"HEADER_JOURNALTIME") ORDER BY DATE_PART(HOUR,"HEADER_JOURNALTIME") ',
+        sqlText: 'SELECT COUNT(DISTINCT "HEADER_ID") AS "PURCHASE_COUNT", DATE_PART(HOUR,"HEADER_JOURNALTIME") AS "HOUR_OF_PURCHASE" FROM "DEV_EDW_JUNCTION"."JUNCTION_2020"."CAFE_POS_DATA" GROUP BY DATE_PART(HOUR,"HEADER_JOURNALTIME") ORDER BY DATE_PART(HOUR,"HEADER_JOURNALTIME") ',
         complete: function(err, stmt, rows) {
           if (err) {
             console.error('Failed to execute statement due to the following error: ' + err.message);

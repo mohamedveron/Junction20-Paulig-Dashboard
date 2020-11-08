@@ -58,13 +58,13 @@
           let productsInfo = [];
 
           products.forEach(item => {
-            productsInfo.push([item.PRODUCT_NAME, item.SUMM]);
+            productsInfo.push([item.HOUR_OF_PURCHASE, item.PURCHASE_COUNT]);
           });
     
           const chart = {
             type: 'line',
             title: {
-                        "text": "The Most Recommended 5 products for you to serve"
+                        "text": "The Hourly rate purchase"
                     },
             legend: {
                 "toggle-action": "hide",
