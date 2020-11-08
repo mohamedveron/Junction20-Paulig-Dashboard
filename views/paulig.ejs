@@ -96,7 +96,7 @@
 
           // renders zingchart to the page
           zingchart.render({
-            id: 'chart1',
+            id: 'chart2',
             data: chart,
             height: '100%',
             width: '100%'
@@ -127,7 +127,7 @@
 
           products.forEach(item => {
             days.push(item.DATE);
-            sales.push(item.SALES);
+            sales.push(item.SALES / 10);
             covid.push(item.COVID19_TOTAL_CASE);
           });
     
@@ -159,24 +159,24 @@
             scaleY: {
             // scale label with unicode character
             label: {
-                text: 'Quantity'
+                text: 'Rate'
             }
             },
             series: [
               {
                 values: sales,
-                text: 'Product Group Quantity',
+                text: 'Sales numbers',
               },
               {
                 values: covid,
-                text: 'Product Group Quantity',
+                text: 'Covid 19 cases',
               }
             ]
           };
 
           // renders zingchart to the page
           zingchart.render({
-            id: 'chart2',
+            id: 'chart1',
             data: chart,
             height: '100%',
             width: '100%'
