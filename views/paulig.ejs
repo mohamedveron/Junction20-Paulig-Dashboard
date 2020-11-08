@@ -64,13 +64,10 @@
           const chart = {
             type: 'line',
             title: {
-                        "text": "The Hourly rate purchase"
+                        "text": "The Hourly Rate Purchases"
                     },
             legend: {
                 "toggle-action": "hide",
-                header: {
-                    "text": "Legend Header"
-                        },
                 item: {
                     "cursor": "pointer"
                     },
@@ -80,19 +77,19 @@
             scaleX: {
             // set scale label
             label: {
-                text: 'Products'
+                text: 'HOUR OF PURCHASE'
             },
             },
             scaleY: {
             // scale label with unicode character
             label: {
-                text: 'Quantity'
+                text: 'PURCHASE COUNT'
             }
             },
             series: [
               {
                 values: productsInfo,
-                text: 'Product Quantity',
+                text: 'Product count per hour',
               }
             ]
           };
