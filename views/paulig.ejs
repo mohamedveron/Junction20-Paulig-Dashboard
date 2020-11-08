@@ -41,7 +41,7 @@
       const url = 'http://localhost:3000/hourlypurchased';
       const url2 = 'http://localhost:3000/covid';
      
-      // get most 5 unpurchased data
+      // get hourly purchased data
       fetch(url).then(res => {
           
           if (!res.ok) {
@@ -107,7 +107,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-        // get the most 5 purchased data in the same area
+        // get the time series covid 19 sales data
         fetch(url2).then(res => {
           
           if (!res.ok) {
@@ -121,21 +121,25 @@
         .then(data => {
 
           let products = data;
-          let productsInfo = [];
+          let days = [];
+          let sales = [];
+          let covid = [];
 
           products.forEach(item => {
-            productsInfo.push([item.PRODUCT_SUBGROUP, item.SUMM]);
+            days.push(item.DATE);
+            sales.push(item.SALES);
+            covid.push(item.COVID19_TOTAL_CASE);
           });
     
           const chart = {
-            type: 'bar',
+            type: 'line',
             title: {
-                        "text": "The Trendy products in your Zone"
+                        "text": "The Time Series Analysis of sales during COVID 19"
                     },
             legend: {
                 "toggle-action": "hide",
                 header: {
-                    "text": "Legend Header"
+                    "text": "Covid 19 Analysis"
                         },
                 item: {
                     "cursor": "pointer"
@@ -146,8 +150,11 @@
             scaleX: {
             // set scale label
             label: {
-                text: 'Products'
+                text: 'Days'
             },
+         
+                values: days,
+               
             },
             scaleY: {
             // scale label with unicode character
@@ -157,7 +164,11 @@
             },
             series: [
               {
-                values: productsInfo,
+                values: sales,
+                text: 'Product Group Quantity',
+              },
+              {
+                values: covid,
                 text: 'Product Group Quantity',
               }
             ]

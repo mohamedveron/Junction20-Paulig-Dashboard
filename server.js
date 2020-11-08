@@ -101,7 +101,7 @@ connection.connect(
     app.get('/covid', function(req, res){
       // do something
       connection.execute({
-        sqlText: 'SELECT SUM("HEADER_TOTAL") AS "SALES", "HEADER_BOOKINGDATE" AS "DATE", "TOTAL_CASES" AS "COVID19 TOTAL CASE" FROM "DEV_EDW_JUNCTION"."JUNCTION_2020"."CAFE_POS_DATA" INNER JOIN "DEV_EDW_JUNCTION"."TEAM_05"."COVID19" ON "HEADER_BOOKINGDATE" = "DATE" GROUP BY "HEADER_BOOKINGDATE", "TOTAL_CASES" ORDER BY "HEADER_BOOKINGDATE" ',
+        sqlText: 'SELECT SUM("HEADER_TOTAL") AS "SALES", "HEADER_BOOKINGDATE" AS "DATE", "TOTAL_CASES" AS "COVID19_TOTAL_CASE" FROM "DEV_EDW_JUNCTION"."JUNCTION_2020"."CAFE_POS_DATA" INNER JOIN "DEV_EDW_JUNCTION"."TEAM_05"."COVID19" ON "HEADER_BOOKINGDATE" = "DATE" GROUP BY "HEADER_BOOKINGDATE", "TOTAL_CASES" ORDER BY "HEADER_BOOKINGDATE" ',
         complete: function(err, stmt, rows) {
           if (err) {
             console.error('Failed to execute statement due to the following error: ' + err.message);
