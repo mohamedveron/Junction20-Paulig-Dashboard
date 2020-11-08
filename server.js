@@ -44,6 +44,12 @@ connection.connect(
       
     });
 
+    app.get('/paulig', function(req, res){
+      // do something
+      res.render('paulig.ejs')
+      
+    });
+
     app.get('/mostpurchased', function(req, res){
       // do something
       connection.execute({
