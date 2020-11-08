@@ -14,6 +14,8 @@ app.set('views', path.join(__dirname, 'views'));
 // sets view engine
 app.set('view engine', 'ejs'); 
 
+app.use(express.static(__dirname + '/views'));
+
 // Create a Connection object that we can use later to connect.
 var connection = snowflake.createConnection( {
     account: 'paulig.west-europe.azure',

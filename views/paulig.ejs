@@ -17,7 +17,7 @@
        }
        #chart3 {
          height: 500px;
-         width: 1500px;
+         width: 1800px;
          margin: 50px
        }
      </style>
@@ -71,7 +71,7 @@
           const chart = {
             type: 'line',
             title: {
-                        "text": "The Hourly Rate Purchases"
+                        "text": "The hour of the most purchases"
                     },
             legend: {
                 "toggle-action": "hide",
@@ -96,7 +96,7 @@
             series: [
               {
                 values: productsInfo,
-                text: 'Product count per hour',
+                text: 'Purchase count of each hour',
               }
             ]
           };
@@ -217,7 +217,7 @@
           const chart = {
             type: 'bar',
             title: {
-                        "text": "The Most 5 Purchased Products"
+                        "text": "The Top 10 Purchased Products"
                     },
             legend: {
                 "toggle-action": "hide",
@@ -236,7 +236,7 @@
             scaleY: {
             // scale label with unicode character
             label: {
-                text: 'PURCHASE COUNT'
+                text: 'PURCHASEs'
             }
             },
             series: [
